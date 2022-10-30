@@ -4,4 +4,5 @@
 #include <SFML/Window.hpp>
 #include <TGUI/TGUI.hpp>
 
-void window();
+
+void SfmlWindow();

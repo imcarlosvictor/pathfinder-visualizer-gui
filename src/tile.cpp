@@ -24,7 +24,7 @@ void Tile::setEndpoint() {
 }
 
 void Tile::CreateTile() {
-    sf::RectangleShape tile = sf::RectangleShape(sf::Vector2(this->length_, this->width_));
-    tile.setSize(this->length_, this->width_);
-    tile.setFillColor();
+    sf::RectangleShape tile = sf::RectangleShape(sf::Vector2f(this->length_, this->width_));
+    tile.setSize(sf::Vector2f(this->length_, this->width_));
+    tile.setFillColor(sf::Color(243,246,244));  // off-white
 }

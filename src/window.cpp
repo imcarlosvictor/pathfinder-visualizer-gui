@@ -1,24 +1,27 @@
-#include "../include/window.h"
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <TGUI/TGUI.hpp>
 
-void window() {
-    sf::RenderWindow window(sf::VideoMode(1500,900), "Pathfinder Visualizer");
-    tgui::GuiSFML gui{window};
 
-    while(window.isOpen()) {
+void SfmlWindow() {
+    sf::RenderWindow sfml_window(sf::VideoMode(1500,900), "Pathfinder Visualizer");
+    tgui::GuiSFML gui{sfml_window};
+
+    while(sfml_window.isOpen()) {
         sf::Event event;
-        while (window.pollEvent(event)) {
+        while (sfml_window.pollEvent(event)) {
             gui.handleEvent(event);  // inform tgui about the event
 
             if (event.type == sf::Event::Closed)
-                window.close();
+                sfml_window.close();
         }
-        window.clear(sf::Color::White);
 
         // draw everything here...
         // end the current frame
 
-        window.clear();
+        sfml_window.clear();
+        sfml_window.clear(sf::Color::White);
         gui.draw();  // draw all widgets in the gui
-        window.display();
+        sfml_window.display();
     }
 }
