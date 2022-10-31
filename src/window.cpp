@@ -3,7 +3,7 @@
 void SfmlWindow() {
     sf::RenderWindow sfml_window(sf::VideoMode(1500,900), "Pathfinder Visualizer");
     tgui::GuiSFML gui{sfml_window};
-    LoadWidgets(gui);  // add widgets
+    LoadWidgets(sfml_window, gui);  // add widgets
 
     while(sfml_window.isOpen()) {
         sf::Event event;
@@ -24,7 +24,7 @@ void SfmlWindow() {
     }
 }
 
-void LoadWidgets(tgui::GuiBase& gui) {
+void LoadWidgets(sf::RenderWindow& sfml_window, tgui::GuiBase& gui) {
     // Title
     auto title = tgui::Label::create();
     title->setText("Algorithm Visualizer");
@@ -54,6 +54,7 @@ void LoadWidgets(tgui::GuiBase& gui) {
     map_btn->addItem("Item 1");
     map_btn->addItem("Item 2");
     map_btn->addItem("Item 3");
+    map_btn->getRenderer()->setBackgroundColor(sf::Color(213,213,213));
     map_btn->setSize(250, 25);
     map_btn->setPosition(40, 210);
     gui.add(map_btn);
@@ -62,6 +63,7 @@ void LoadWidgets(tgui::GuiBase& gui) {
     auto generate_map_btn = tgui::Button::create();
     generate_map_btn->setText("Generate Map");
     generate_map_btn->getRenderer()->setBackgroundColor(sf::Color(213,213,213));
+    generate_map_btn->getRenderer()->setBackgroundColorHover(sf::Color(213,213,213,200));
     generate_map_btn->setSize(250,40);
     generate_map_btn->setPosition(40, 240);
     gui.add(generate_map_btn);
@@ -85,6 +87,7 @@ void LoadWidgets(tgui::GuiBase& gui) {
     algo_btn->addItem("Bidirectional Swarm Algorithm");
     algo_btn->addItem("Breath-first Search");
     algo_btn->addItem("Depth-first Search");
+    algo_btn->getRenderer()->setBackgroundColor(sf::Color(213,213,213));
     algo_btn->setSize(250, 25);
     algo_btn->setPosition(40, 350);
     gui.add(algo_btn);
@@ -98,10 +101,18 @@ void LoadWidgets(tgui::GuiBase& gui) {
     legend_lbl->setPosition(40, 440);
     gui.add(legend_lbl);
 
+    // SFML Block
+    sf::RectangleShape legend_block(sf::Vector2f(100,100));
+    legend_block.setFillColor(sf::Color::Red);
+    legend_block.setPosition(40, 600);
+    sfml_window.draw(legend_block);
+
+
     // Reset Maze Button
     auto reset_maze_btn = tgui::Button::create();
     reset_maze_btn->setText("Reset Maze");
     reset_maze_btn->getRenderer()->setBackgroundColor(sf::Color(213,213,213));
+    reset_maze_btn->getRenderer()->setBackgroundColorHover(sf::Color(213,213,213,200));
     reset_maze_btn->setSize(124,40);
     reset_maze_btn->setPosition(40, 739);
     gui.add(reset_maze_btn);
@@ -110,6 +121,7 @@ void LoadWidgets(tgui::GuiBase& gui) {
     auto reset_path_btn = tgui::Button::create();
     reset_path_btn->setText("Reset Path");
     reset_path_btn->getRenderer()->setBackgroundColor(sf::Color(213,213,213));
+    reset_path_btn->getRenderer()->setBackgroundColorHover(sf::Color(213,213,213,200));
     reset_path_btn->setSize(124,40);
     reset_path_btn->setPosition(165, 739);
     gui.add(reset_path_btn);

@@ -6,4 +6,4 @@
 
 
 void SfmlWindow();
-void LoadWidgets(tgui::GuiBase& gui);
+void LoadWidgets(sf::RenderWindow& sfml_window, tgui::GuiBase& gui);
