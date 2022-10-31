@@ -18,7 +18,7 @@ void SfmlWindow() {
         // end the current frame
 
         sfml_window.clear();
-        sfml_window.clear(sf::Color::Black);
+        sfml_window.clear(sf::Color(19,19,19));
         gui.draw();  // draw all widgets in the gui
         sfml_window.display();
     }
@@ -28,6 +28,7 @@ void LoadWidgets(tgui::GuiBase& gui) {
     // Title
     auto title = tgui::Label::create();
     title->setText("Algorithm Visualizer");
+    title->getRenderer()->setTextColor(sf::Color(213,213,213));
     title->setTextSize(25);
     title->setPosition(40, 50);
     gui.add(title);
@@ -35,6 +36,7 @@ void LoadWidgets(tgui::GuiBase& gui) {
     // Map algorithm label 
     auto map_lbl = tgui::Label::create();
     map_lbl->setText("Map Generate");
+    map_lbl->getRenderer()->setTextColor(sf::Color(213,213,213));
     map_lbl->setTextSize(18);
     map_lbl->setPosition(40, 140);
     gui.add(map_lbl);
@@ -42,6 +44,7 @@ void LoadWidgets(tgui::GuiBase& gui) {
     // Map algorithm sidenote
     auto user_note = tgui::Label::create();
     user_note->setText("Note: You can choose either to generate \na map or create your own by manually \nclicking the squares");
+    user_note->getRenderer()->setTextColor(sf::Color(213,213,213));
     user_note->setTextSize(12);
     user_note->setPosition(40, 163);
     gui.add(user_note);
@@ -58,13 +61,15 @@ void LoadWidgets(tgui::GuiBase& gui) {
     // Generate Map Button
     auto generate_map_btn = tgui::Button::create();
     generate_map_btn->setText("Generate Map");
+    generate_map_btn->getRenderer()->setBackgroundColor(sf::Color(213,213,213));
     generate_map_btn->setSize(250,40);
     generate_map_btn->setPosition(40, 240);
     gui.add(generate_map_btn);
 
     // Pathfinder algorithm label
     auto algo_lbl = tgui::Label::create();
-    algo_lbl->setText("Algorithms");
+    algo_lbl->setText("Pathfinder Algorithms");
+    algo_lbl->getRenderer()->setTextColor(sf::Color(213,213,213));
     algo_lbl->setTextSize(18);
     algo_lbl->setSize(250, 25);
     algo_lbl->setPosition(40, 320);
@@ -87,6 +92,7 @@ void LoadWidgets(tgui::GuiBase& gui) {
     // Legend
     auto legend_lbl = tgui::Label::create();
     legend_lbl->setText("Legend");
+    legend_lbl->getRenderer()->setTextColor(sf::Color(213,213,213));
     legend_lbl->setTextSize(18);
     legend_lbl->setSize(250, 25);
     legend_lbl->setPosition(40, 440);
@@ -95,6 +101,7 @@ void LoadWidgets(tgui::GuiBase& gui) {
     // Reset Maze Button
     auto reset_maze_btn = tgui::Button::create();
     reset_maze_btn->setText("Reset Maze");
+    reset_maze_btn->getRenderer()->setBackgroundColor(sf::Color(213,213,213));
     reset_maze_btn->setSize(124,40);
     reset_maze_btn->setPosition(40, 739);
     gui.add(reset_maze_btn);
@@ -102,14 +109,20 @@ void LoadWidgets(tgui::GuiBase& gui) {
     // Reset Path Button
     auto reset_path_btn = tgui::Button::create();
     reset_path_btn->setText("Reset Path");
+    reset_path_btn->getRenderer()->setBackgroundColor(sf::Color(213,213,213));
     reset_path_btn->setSize(124,40);
     reset_path_btn->setPosition(165, 739);
     gui.add(reset_path_btn);
     
     // Start Button
-    auto button = tgui::Button::create();
-    button->setText("VISUALIZE");
-    button->setSize(250,50);
-    button->setPosition(40, 780);
-    gui.add(button);
+    auto visualize_btn = tgui::Button::create();
+    visualize_btn->setText("VISUALIZE");
+    visualize_btn->getRenderer()->setBackgroundColor(sf::Color(56,36,220));
+    visualize_btn->getRenderer()->setBorderColor(sf::Color(19,19,19));
+    visualize_btn->getRenderer()->setTextColor(sf::Color(213,213,213));
+    visualize_btn->getRenderer()->setBackgroundColorHover(sf::Color(56,36,220,200));
+    visualize_btn->getRenderer()->setTextColorHover(sf::Color(213,213,213,200));
+    visualize_btn->setSize(250,50);
+    visualize_btn->setPosition(40, 780);
+    gui.add(visualize_btn);
 }
