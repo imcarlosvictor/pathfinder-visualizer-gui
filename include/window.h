@@ -6,3 +6,4 @@
 
 
 void SfmlWindow();
+void GuiWidget(tgui::GuiBase& gui);
