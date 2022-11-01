@@ -4,7 +4,7 @@
 #include "../include/window.h"
 
 int main() {
-    SfmlWindow();
+    SFMLWindow();
 
     return 0;
 }

@@ -1,9 +1,9 @@
 #include "../include/window.h"
 
-void SfmlWindow() {
+void SFMLWindow() {
     sf::RenderWindow sfml_window(sf::VideoMode(1500,900), "Pathfinder Visualizer");
     tgui::GuiSFML gui{sfml_window};
-    LoadWidgets(sfml_window, gui);  // add widgets
+    LoadTGUIWidgets(gui);  // load TGUI widgets
 
     while(sfml_window.isOpen()) {
         sf::Event event;
@@ -19,32 +19,29 @@ void SfmlWindow() {
 
         sfml_window.clear();
         sfml_window.clear(sf::Color(19,19,19));
+        LoadSFMLWidgets(sfml_window);  // load SFML widgets
         gui.draw();  // draw all widgets in the gui
         sfml_window.display();
     }
 }
 
-void LoadWidgets(sf::RenderWindow& sfml_window, tgui::GuiBase& gui) {
-    // Title
-    auto title = tgui::Label::create();
-    title->setText("Algorithm Visualizer");
-    title->getRenderer()->setTextColor(sf::Color(213,213,213));
-    title->setTextSize(25);
-    title->setPosition(40, 50);
-    gui.add(title);
-
-    // Map algorithm label 
-    auto map_lbl = tgui::Label::create();
-    map_lbl->setText("Map Generate");
-    map_lbl->getRenderer()->setTextColor(sf::Color(213,213,213));
-    map_lbl->setTextSize(18);
-    map_lbl->setPosition(40, 140);
-    gui.add(map_lbl);
+void LoadTGUIWidgets(tgui::GuiBase& gui) {
+    // Labels
+    CreateLegendLabel(gui, "Algorithm Visualizer", 18, 40, 50);  // GUI title
+    CreateLegendLabel(gui, "Map Generation", 18, 40, 140);  // Content label
+    CreateLegendLabel(gui, "Pathfinder Algorithms", 18, 40, 320);  // Content label
+    CreateLegendLabel(gui, "Legend", 18, 40, 430);  // Startpoint label
+    CreateLegendLabel(gui, "Startpoint", 12, 80, 478);  // Startpoint legend label
+    CreateLegendLabel(gui, "Endpoint", 12, 80, 518);  // Endpoint legend label
+    CreateLegendLabel(gui, "Path", 12, 80, 558);  // Path legend label
+    CreateLegendLabel(gui, "Unxplored", 12, 80, 598);  // Unxplored legend label
+    CreateLegendLabel(gui, "Explored", 12, 218, 478);  // Explored legend label
+    CreateLegendLabel(gui, "Border", 12, 218, 518);  // Border legend label
     
     // Map algorithm sidenote
     auto user_note = tgui::Label::create();
     user_note->setText("Note: You can choose either to generate \na map or create your own by manually \nclicking the squares");
-    user_note->getRenderer()->setTextColor(sf::Color(213,213,213));
+    user_note->getRenderer()->setTextColor(sf::Color(93,93,93));
     user_note->setTextSize(12);
     user_note->setPosition(40, 163);
     gui.add(user_note);
@@ -68,15 +65,6 @@ void LoadWidgets(sf::RenderWindow& sfml_window, tgui::GuiBase& gui) {
     generate_map_btn->setPosition(40, 240);
     gui.add(generate_map_btn);
 
-    // Pathfinder algorithm label
-    auto algo_lbl = tgui::Label::create();
-    algo_lbl->setText("Pathfinder Algorithms");
-    algo_lbl->getRenderer()->setTextColor(sf::Color(213,213,213));
-    algo_lbl->setTextSize(18);
-    algo_lbl->setSize(250, 25);
-    algo_lbl->setPosition(40, 320);
-    gui.add(algo_lbl);
-
     // Pathfinder algorithm options
     auto algo_btn = tgui::ComboBox::create();
     algo_btn->addItem("Dijkstra's Algorithm");
@@ -91,42 +79,28 @@ void LoadWidgets(sf::RenderWindow& sfml_window, tgui::GuiBase& gui) {
     algo_btn->setSize(250, 25);
     algo_btn->setPosition(40, 350);
     gui.add(algo_btn);
-
-    // Legend
-    auto legend_lbl = tgui::Label::create();
-    legend_lbl->setText("Legend");
-    legend_lbl->getRenderer()->setTextColor(sf::Color(213,213,213));
-    legend_lbl->setTextSize(18);
-    legend_lbl->setSize(250, 25);
-    legend_lbl->setPosition(40, 440);
-    gui.add(legend_lbl);
-
-    // SFML Block
-    sf::RectangleShape legend_block(sf::Vector2f(100,100));
-    legend_block.setFillColor(sf::Color::Red);
-    legend_block.setPosition(40, 600);
-    sfml_window.draw(legend_block);
-
-
-    // Reset Maze Button
+    
+    // Reset maze button
     auto reset_maze_btn = tgui::Button::create();
     reset_maze_btn->setText("Reset Maze");
     reset_maze_btn->getRenderer()->setBackgroundColor(sf::Color(213,213,213));
+    reset_maze_btn->getRenderer()->setBorderColor(sf::Color(19,19,19));
     reset_maze_btn->getRenderer()->setBackgroundColorHover(sf::Color(213,213,213,200));
-    reset_maze_btn->setSize(124,40);
-    reset_maze_btn->setPosition(40, 739);
+    reset_maze_btn->setSize(125,35);
+    reset_maze_btn->setPosition(40, 744);
     gui.add(reset_maze_btn);
     
-    // Reset Path Button
+    // Reset path button
     auto reset_path_btn = tgui::Button::create();
     reset_path_btn->setText("Reset Path");
     reset_path_btn->getRenderer()->setBackgroundColor(sf::Color(213,213,213));
+    reset_path_btn->getRenderer()->setBorderColor(sf::Color(19,19,19));
     reset_path_btn->getRenderer()->setBackgroundColorHover(sf::Color(213,213,213,200));
-    reset_path_btn->setSize(124,40);
-    reset_path_btn->setPosition(165, 739);
+    reset_path_btn->setSize(125,35);
+    reset_path_btn->setPosition(165, 744);
     gui.add(reset_path_btn);
     
-    // Start Button
+    // Start button
     auto visualize_btn = tgui::Button::create();
     visualize_btn->setText("VISUALIZE");
     visualize_btn->getRenderer()->setBackgroundColor(sf::Color(56,36,220));
@@ -137,4 +111,33 @@ void LoadWidgets(sf::RenderWindow& sfml_window, tgui::GuiBase& gui) {
     visualize_btn->setSize(250,50);
     visualize_btn->setPosition(40, 780);
     gui.add(visualize_btn);
+
+}
+
+void LoadSFMLWidgets(sf::RenderWindow& window) {
+    CreateLegendTile(window, 30, 30, 34, 139, 34, 43, 470);  // Startpoint tile
+    CreateLegendTile(window, 30, 30, 184, 15, 10, 43, 510);  // Endpoint tile
+    CreateLegendTile(window, 30, 30, 56, 36, 220, 43, 550);  // Path tile
+    CreateLegendTile(window, 30, 30, 213, 213, 213, 43, 590);  // Unexplored tile
+    CreateLegendTile(window, 30, 30, 62, 62, 62, 180, 470);  // Explored tile
+    CreateLegendTile(window, 30, 30, 0, 0, 0, 180, 510);  // Border tile
+}
+
+void CreateLegendLabel(tgui::GuiBase& gui, std::string text, int size, int x, int y) {
+    auto lbl = tgui::Label::create();
+    lbl->setText(text);
+    lbl->getRenderer()->setTextColor(sf::Color(213,213,213));
+    lbl->setTextSize(size);
+    lbl->setSize(250, 25);
+    lbl->setPosition(x, y);
+    gui.add(lbl);
+}
+
+void CreateLegendTile(sf::RenderWindow& window, int length, int width, int r, int g, int b, int x, int y) {
+    sf::RectangleShape legend_tile;
+    legend_tile.setSize(sf::Vector2f(length, width));
+    legend_tile.setFillColor(sf::Color(r,g,b));
+    legend_tile.setOutlineColor(sf::Color(19,19,19));
+    legend_tile.setPosition(x, y);
+    window.draw(legend_tile);
 }
