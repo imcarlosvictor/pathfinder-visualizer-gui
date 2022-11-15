@@ -3,7 +3,7 @@
 void SFMLWindow() {
     sf::RenderWindow sfml_window(sf::VideoMode(1500,900), "Pathfinder Visualizer");
     tgui::GuiSFML gui{sfml_window};
-    LoadTGUIWidgets(gui);  // load TGUI widgets
+    LoadTGUIWidgets(sfml_window, gui);  // load TGUI widgets
 
     while(sfml_window.isOpen()) {
         sf::Event event;
@@ -21,22 +21,23 @@ void SFMLWindow() {
         sfml_window.clear(sf::Color(19,19,19));
         LoadSFMLWidgets(sfml_window);  // load SFML widgets
         gui.draw();  // draw all widgets in the gui
+        /* CreateMap(sfml_window); */
         sfml_window.display();
     }
 }
 
-void LoadTGUIWidgets(tgui::GuiBase& gui) {
+void LoadTGUIWidgets(sf::RenderWindow& window, tgui::GuiBase& gui) {
     // Labels
-    CreateLegendLabel(gui, "Algorithm Visualizer", 18, 40, 50);  // GUI title
-    CreateLegendLabel(gui, "Map Generation", 18, 40, 140);  // Content label
-    CreateLegendLabel(gui, "Pathfinder Algorithms", 18, 40, 320);  // Content label
-    CreateLegendLabel(gui, "Legend", 18, 40, 430);  // Startpoint label
-    CreateLegendLabel(gui, "Startpoint", 12, 80, 478);  // Startpoint legend label
-    CreateLegendLabel(gui, "Endpoint", 12, 80, 518);  // Endpoint legend label
-    CreateLegendLabel(gui, "Path", 12, 80, 558);  // Path legend label
-    CreateLegendLabel(gui, "Unxplored", 12, 80, 598);  // Unxplored legend label
-    CreateLegendLabel(gui, "Explored", 12, 218, 478);  // Explored legend label
-    CreateLegendLabel(gui, "Border", 12, 218, 518);  // Border legend label
+    CreateLegendLabel(gui, "Algorithm Visualizer", 18, 60, 50);  // GUI title
+    CreateLegendLabel(gui, "Map Generation", 15, 40, 140);  // Content label
+    CreateLegendLabel(gui, "Pathfinder Algorithms", 15, 40, 320);  // Content label
+    CreateLegendLabel(gui, "Legend", 15, 40, 430);  // Startpoint label
+    CreateLegendLabel(gui, "Startpoint", 12, 80, 467);  // Startpoint legend label
+    CreateLegendLabel(gui, "Endpoint", 12, 80, 507);  // Endpoint legend label
+    CreateLegendLabel(gui, "Path", 12, 80, 547);  // Path legend label
+    CreateLegendLabel(gui, "Unexplored", 12, 80, 587);  // Unxplored legend label
+    CreateLegendLabel(gui, "Explored", 12, 218, 467);  // Explored legend label
+    CreateLegendLabel(gui, "Border", 12, 218, 507);  // Border legend label
     
     // Map algorithm sidenote
     auto user_note = tgui::Label::create();
@@ -60,10 +61,21 @@ void LoadTGUIWidgets(tgui::GuiBase& gui) {
     auto generate_map_btn = tgui::Button::create();
     generate_map_btn->setText("Generate Map");
     generate_map_btn->getRenderer()->setBackgroundColor(sf::Color(213,213,213));
+    generate_map_btn->getRenderer()->setBorderColor(sf::Color(19,19,19));
     generate_map_btn->getRenderer()->setBackgroundColorHover(sf::Color(213,213,213,200));
     generate_map_btn->setSize(250,40);
     generate_map_btn->setPosition(40, 240);
     gui.add(generate_map_btn);
+    // Add button functionality
+    generate_map_btn->onPress([&]{
+            CreateMap(window);
+            PrintStatement();
+            window.clear(sf::Color::White);
+            /* generate_map_btn->getRenderer()->setBackgroundColor(sf::Color::Red); */
+            std::cout << "button pressed" << std::endl;
+            });
+    /* generate_map_btn->onPress(ChangeBackground); */
+
 
     // Pathfinder algorithm options
     auto algo_btn = tgui::ComboBox::create();
@@ -103,24 +115,23 @@ void LoadTGUIWidgets(tgui::GuiBase& gui) {
     // Start button
     auto visualize_btn = tgui::Button::create();
     visualize_btn->setText("VISUALIZE");
-    visualize_btn->getRenderer()->setBackgroundColor(sf::Color(56,36,220));
+    visualize_btn->getRenderer()->setBackgroundColor(sf::Color(0,0,220));
     visualize_btn->getRenderer()->setBorderColor(sf::Color(19,19,19));
     visualize_btn->getRenderer()->setTextColor(sf::Color(213,213,213));
-    visualize_btn->getRenderer()->setBackgroundColorHover(sf::Color(56,36,220,200));
+    visualize_btn->getRenderer()->setBackgroundColorHover(sf::Color(0,0,220,200));
     visualize_btn->getRenderer()->setTextColorHover(sf::Color(213,213,213,200));
     visualize_btn->setSize(250,50);
     visualize_btn->setPosition(40, 780);
     gui.add(visualize_btn);
-
 }
 
 void LoadSFMLWidgets(sf::RenderWindow& window) {
-    CreateLegendTile(window, 30, 30, 34, 139, 34, 43, 470);  // Startpoint tile
-    CreateLegendTile(window, 30, 30, 184, 15, 10, 43, 510);  // Endpoint tile
-    CreateLegendTile(window, 30, 30, 56, 36, 220, 43, 550);  // Path tile
-    CreateLegendTile(window, 30, 30, 213, 213, 213, 43, 590);  // Unexplored tile
-    CreateLegendTile(window, 30, 30, 62, 62, 62, 180, 470);  // Explored tile
-    CreateLegendTile(window, 30, 30, 0, 0, 0, 180, 510);  // Border tile
+    CreateLegendTile(window, 30, 30, 34, 139, 34, 43, 460);  // Startpoint tile
+    CreateLegendTile(window, 30, 30, 253, 184, 37, 43, 500);  // Endpoint tile
+    CreateLegendTile(window, 30, 30, 0, 0, 220, 43, 540);  // Path tile
+    CreateLegendTile(window, 30, 30, 213, 213, 213, 43, 580);  // Unexplored tile
+    CreateLegendTile(window, 30, 30, 62, 62, 62, 180, 460);  // Explored tile
+    CreateLegendTile(window, 30, 30, 0, 0, 0, 180, 500);  // Border tile
 }
 
 void CreateLegendLabel(tgui::GuiBase& gui, std::string text, int size, int x, int y) {
@@ -140,4 +151,27 @@ void CreateLegendTile(sf::RenderWindow& window, int length, int width, int r, in
     legend_tile.setOutlineColor(sf::Color(19,19,19));
     legend_tile.setPosition(x, y);
     window.draw(legend_tile);
+}
+
+
+// Test
+void CreateMap(sf::RenderWindow& window) {
+    int y = 0;
+    for (int i = 0; i < 30; i++) {
+        sf::RectangleShape tile(sf::Vector2f(30, 30));
+        tile.setFillColor(sf::Color::White);
+        tile.setOutlineColor(sf::Color::Black);
+        tile.setOutlineThickness(1);
+        tile.setPosition(330, y);
+        window.draw(tile);
+        y += 30;
+    }
+}
+
+void ChangeBackground(sf::RenderWindow& window) {
+    window.clear(sf::Color::Red);
+}
+
+void PrintStatement() {
+    std::cout << "hwllo world" << std::endl;
 }
