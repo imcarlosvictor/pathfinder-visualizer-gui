@@ -1,4 +1,5 @@
 #include "../include/window.h"
+#include "../include/maze.h"
 
 void SFMLWindow() {
     sf::RenderWindow sfml_window(sf::VideoMode(1500,900), "Pathfinder Visualizer");
@@ -21,7 +22,7 @@ void SFMLWindow() {
         sfml_window.clear(sf::Color(19,19,19));
         LoadSFMLWidgets(sfml_window);  // load SFML widgets
         gui.draw();  // draw all widgets in the gui
-        /* CreateMap(sfml_window); */
+        CreateMap(sfml_window);
         sfml_window.display();
     }
 }
@@ -155,17 +156,25 @@ void CreateLegendTile(sf::RenderWindow& window, int length, int width, int r, in
 
 
 // Test
+/* void CreateMap(sf::RenderWindow& window) { */
+/*     int y = 0; */
+/*     for (int i = 0; i < 30; i++) { */
+/*         sf::RectangleShape tile(sf::Vector2f(30, 30)); */
+/*         tile.setFillColor(sf::Color::White); */
+/*         tile.setOutlineColor(sf::Color::Black); */
+/*         tile.setOutlineThickness(1); */
+/*         tile.setPosition(330, y); */
+/*         window.draw(tile); */
+/*         y += 30; */
+/*     } */
+/* } */
+
+/*
+ * Create the map for the visualizer
+ */
 void CreateMap(sf::RenderWindow& window) {
-    int y = 0;
-    for (int i = 0; i < 30; i++) {
-        sf::RectangleShape tile(sf::Vector2f(30, 30));
-        tile.setFillColor(sf::Color::White);
-        tile.setOutlineColor(sf::Color::Black);
-        tile.setOutlineThickness(1);
-        tile.setPosition(330, y);
-        window.draw(tile);
-        y += 30;
-    }
+    Map map(39, 30);
+    map.CreateMap(window);
 }
 
 void ChangeBackground(sf::RenderWindow& window) {

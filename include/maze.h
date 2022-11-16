@@ -1,12 +1,18 @@
 #pragma once
 
-#include <SFMLGraphics.hpp>
+#include "./tile.h"
+
+#include <vector>
+#include <SFML/Graphics.hpp>
+
 
 class Map {
 	public:
-		CreateMap(sf::RenderWindow& window);
+		Map(int rows, int columns);
+		void CreateMap(sf::RenderWindow& window);
 
 	private:
-
-
+		int rows_;
+		int columns_;
+		std::vector<Tile*> *map;	
 };
