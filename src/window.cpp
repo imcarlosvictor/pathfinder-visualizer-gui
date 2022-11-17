@@ -156,26 +156,26 @@ void CreateLegendTile(sf::RenderWindow& window, int length, int width, int r, in
 
 
 // Test
-/* void CreateMap(sf::RenderWindow& window) { */
-/*     int y = 0; */
-/*     for (int i = 0; i < 30; i++) { */
-/*         sf::RectangleShape tile(sf::Vector2f(30, 30)); */
-/*         tile.setFillColor(sf::Color::White); */
-/*         tile.setOutlineColor(sf::Color::Black); */
-/*         tile.setOutlineThickness(1); */
-/*         tile.setPosition(330, y); */
-/*         window.draw(tile); */
-/*         y += 30; */
-/*     } */
-/* } */
+void CreateMap(sf::RenderWindow& window) {
+    int y = 0;
+    for (int i = 0; i < 30; i++) {
+        sf::RectangleShape tile(sf::Vector2f(30, 30));
+        tile.setFillColor(sf::Color::White);
+        tile.setOutlineColor(sf::Color::Black);
+        tile.setOutlineThickness(1);
+        tile.setPosition(330, y);
+        window.draw(tile);
+        y += 30;
+    }
+}
 
 /*
  * Create the map for the visualizer
  */
-void CreateMap(sf::RenderWindow& window) {
-    Map map(39, 30);
-    map.CreateMap(window);
-}
+/*void CreateMap(sf::RenderWindow& window) {*/
+/*    Map map(39, 30);*/
+/*    map.CreateMap(window);*/
+/*}*/
 
 void ChangeBackground(sf::RenderWindow& window) {
     window.clear(sf::Color::Red);
