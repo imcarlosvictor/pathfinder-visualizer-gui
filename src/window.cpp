@@ -3,26 +3,24 @@
 
 void SFMLWindow() {
     sf::RenderWindow sfml_window(sf::VideoMode(1500,900), "Pathfinder Visualizer");
+    // Tgui
     tgui::GuiSFML gui{sfml_window};
+    // Load GUI
     LoadTGUIWidgets(sfml_window, gui);  // load TGUI widgets
+    Map map(39, 30);
 
     while(sfml_window.isOpen()) {
         sf::Event event;
         while (sfml_window.pollEvent(event)) {
             gui.handleEvent(event);  // inform tgui about the event
-
             if (event.type == sf::Event::Closed)
                 sfml_window.close();
         }
-
         // draw everything here...
-        // end the current frame
-
-        sfml_window.clear();
         sfml_window.clear(sf::Color(19,19,19));
-        LoadSFMLWidgets(sfml_window);  // load SFML widgets
+        LoadSFMLWidgets(sfml_window);  // load legend section
         gui.draw();  // draw all widgets in the gui
-        CreateMap(sfml_window);
+        map.CreateMap(sfml_window);
         sfml_window.display();
     }
 }
@@ -116,20 +114,23 @@ void LoadTGUIWidgets(sf::RenderWindow& window, tgui::GuiBase& gui) {
     // Start button
     auto visualize_btn = tgui::Button::create();
     visualize_btn->setText("VISUALIZE");
-    visualize_btn->getRenderer()->setBackgroundColor(sf::Color(0,0,220));
+    visualize_btn->getRenderer()->setBackgroundColor(sf::Color(23,23,255));  // #1717ff
     visualize_btn->getRenderer()->setBorderColor(sf::Color(19,19,19));
     visualize_btn->getRenderer()->setTextColor(sf::Color(213,213,213));
-    visualize_btn->getRenderer()->setBackgroundColorHover(sf::Color(0,0,220,200));
+    visualize_btn->getRenderer()->setBackgroundColorHover(sf::Color(23,23,255,200));
     visualize_btn->getRenderer()->setTextColorHover(sf::Color(213,213,213,200));
     visualize_btn->setSize(250,50);
     visualize_btn->setPosition(40, 780);
     gui.add(visualize_btn);
 }
 
+/*
+ * Creates the tiles for the legend
+ */
 void LoadSFMLWidgets(sf::RenderWindow& window) {
     CreateLegendTile(window, 30, 30, 34, 139, 34, 43, 460);  // Startpoint tile
     CreateLegendTile(window, 30, 30, 253, 184, 37, 43, 500);  // Endpoint tile
-    CreateLegendTile(window, 30, 30, 0, 0, 220, 43, 540);  // Path tile
+    CreateLegendTile(window, 30, 30, 23, 23, 255, 43, 540);  // Path tile
     CreateLegendTile(window, 30, 30, 213, 213, 213, 43, 580);  // Unexplored tile
     CreateLegendTile(window, 30, 30, 62, 62, 62, 180, 460);  // Explored tile
     CreateLegendTile(window, 30, 30, 0, 0, 0, 180, 500);  // Border tile
@@ -155,6 +156,7 @@ void CreateLegendTile(sf::RenderWindow& window, int length, int width, int r, in
 }
 
 
+// // -----------------------------------------------------------------
 // Test
 void CreateMap(sf::RenderWindow& window) {
     int y = 0;
@@ -168,14 +170,6 @@ void CreateMap(sf::RenderWindow& window) {
         y += 30;
     }
 }
-
-/*
- * Create the map for the visualizer
- */
-/*void CreateMap(sf::RenderWindow& window) {*/
-/*    Map map(39, 30);*/
-/*    map.CreateMap(window);*/
-/*}*/
 
 void ChangeBackground(sf::RenderWindow& window) {
     window.clear(sf::Color::Red);

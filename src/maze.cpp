@@ -7,23 +7,17 @@ Map::Map(int rows, int columns) {
 
 void Map::CreateMap(sf::RenderWindow& window) {
     // loop through y and x axis
-    int x_coord = 0;
+    int x_coord = 330;
     int y_coord = 0;
-    for (int y = 0; y < 30; y++) {
-        /* // Add tile on y axis */
-        /* Tile* y_tile = new Tile(30, 30, x_coord, y_coord); */
-        /* y_tile->CreateTile(window); */
-        /* this->map[y].push_back(y_tile); */
-        /* x_coord += 30; */
-
-        // Add tile on x_axis
-        for (int x = 0; x < 38; x++) {
-            Tile* x_tile = new Tile(30, 30, x_coord, y_coord);
-            x_tile->CreateTile(window);
-            this->map[y].push_back(x_tile);
+    // Add tiles
+    for (int col = 0; col < 30; col++) {
+        for (int row = 0; row < 39; row++) {
+            Tile* new_tile = new Tile(30, 30, x_coord, y_coord);
+            new_tile->CreateTile(window);
+            this->map.push_back(new_tile);
             x_coord += 30;
         }
-        
+        x_coord = 330;  // Reset x-coordinate
         y_coord += 30;
     }
 }

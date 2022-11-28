@@ -14,5 +14,5 @@ class Map {
 	private:
 		int rows_;
 		int columns_;
-		std::vector<Tile*> *map;	
+		std::vector<Tile*> map;	
 };
