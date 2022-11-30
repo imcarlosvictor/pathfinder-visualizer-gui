@@ -1,5 +1,5 @@
 #include "../include/window.h"
-#include "../include/graph.h"
+#include "../include/grid.h"
 
 void SFMLWindow() {
     sf::RenderWindow sfml_window(sf::VideoMode(1500,900), "Pathfinder Visualizer");
@@ -7,7 +7,7 @@ void SFMLWindow() {
     tgui::GuiSFML gui{sfml_window};
     // Load GUI
     LoadTGUIWidgets(sfml_window, gui);  // load TGUI widgets
-    Graph graph(39, 30);
+    Grid grid(39, 30);
 
     while(sfml_window.isOpen()) {
         sf::Event event;
@@ -20,13 +20,13 @@ void SFMLWindow() {
         sfml_window.clear(sf::Color(19,19,19));
         LoadSFMLWidgets(sfml_window);  // load legend section
         gui.draw();  // draw all widgets in the gui
-        graph.CreateGraph(sfml_window);
+        grid.CreateGrid(sfml_window);
         sfml_window.display();
 
         // Find cursor position
         if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
             sf::Vector2i mouse_pos = sf::Mouse::getPosition(sfml_window);
-            graph.ChangeNode(mouse_pos);
+            grid.ChangeTile(mouse_pos);
         }
     }
 }
