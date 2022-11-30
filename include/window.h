@@ -12,7 +12,6 @@ void LoadTGUIWidgets(sf::RenderWindow& window, tgui::GuiBase& gui);
 void LoadSFMLWidgets(sf::RenderWindow& window);
 void CreateLegendLabel(tgui::GuiBase& gui, std::string text, int size, int x, int y);
 void CreateLegendTile(sf::RenderWindow& window, int length, int width, int r, int g, int b, int x, int y);
-void CreateMap(sf::RenderWindow& window);
 
 
 

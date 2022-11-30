@@ -1,34 +1,54 @@
-# include "../include/tile.h"
+# include "../include/node.h"
 
-Tile::Tile(int length, int width, int x_coord, int y_coord) {
+Node::Node(int length, int width, int x_coord, int y_coord) {
+    this->node = sf::RectangleShape(sf::Vector2f(this->length_, this->width_));
+    this->state_ = Unexplored;
     this->length_ = length;
     this->width_ = width;
     this->x_coord_ = x_coord;
     this->y_coord_ = y_coord;
 }
 
-/* ---------------------------- Public ----------------------------*/
-void Tile::setExplored() {
+void Node::setExplored() {
 }
 
-void Tile::setUnexplored() {
+void Node::setUnexplored() {
 }
 
-void Tile::setBorder() {
+void Node::setBorder() {
+    this->node.setFillColor(sf::Color(0,0,0));
+    this->state_ = Border;
 }
 
-void Tile::setStartpoint() {
+void Node::setStartpoint() {
 }
 
-void Tile::setEndpoint() {
+void Node::setEndpoint() {
 }
 
-void Tile::CreateTile(sf::RenderWindow& window) {
-    sf::RectangleShape tile = sf::RectangleShape(sf::Vector2f(this->length_, this->width_));
-    tile.setSize(sf::Vector2f(this->length_, this->width_));
-    tile.setFillColor(sf::Color(243,246,244));  // off-white
-    tile.setOutlineColor(sf::Color::Black);
-    tile.setOutlineThickness(1);
-    tile.setPosition(this->x_coord_, this->y_coord_);
-    window.draw(tile);
+void Node::setCoordinate(int x, int y) {
+    this->x_coord_ = x;
+    this->y_coord_ = y;
 }
+
+int Node::getXCoord() {
+    return x_coord_;
+}
+
+int Node::getYCoord() {
+    return y_coord_;
+}
+
+NodeState Node::getNodeState() {
+    return this->state_;
+}
+
+void Node::CreateNode(sf::RenderWindow& window) {
+    this->node.setSize(sf::Vector2f(this->length_, this->width_));
+    this->node.setFillColor(sf::Color(243,246,244));  // off-white
+    this->node.setOutlineColor(sf::Color::Black);
+    this->node.setOutlineThickness(.5);
+    this->node.setPosition(this->x_coord_, this->y_coord_);
+    window.draw(this->node);
+}
+

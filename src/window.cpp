@@ -1,5 +1,5 @@
 #include "../include/window.h"
-#include "../include/maze.h"
+#include "../include/graph.h"
 
 void SFMLWindow() {
     sf::RenderWindow sfml_window(sf::VideoMode(1500,900), "Pathfinder Visualizer");
@@ -7,7 +7,7 @@ void SFMLWindow() {
     tgui::GuiSFML gui{sfml_window};
     // Load GUI
     LoadTGUIWidgets(sfml_window, gui);  // load TGUI widgets
-    Map map(39, 30);
+    Graph graph(39, 30);
 
     while(sfml_window.isOpen()) {
         sf::Event event;
@@ -20,8 +20,14 @@ void SFMLWindow() {
         sfml_window.clear(sf::Color(19,19,19));
         LoadSFMLWidgets(sfml_window);  // load legend section
         gui.draw();  // draw all widgets in the gui
-        map.CreateMap(sfml_window);
+        graph.CreateGraph(sfml_window);
         sfml_window.display();
+
+        // Find cursor position
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
+            sf::Vector2i mouse_pos = sf::Mouse::getPosition(sfml_window);
+            graph.ChangeNode(mouse_pos);
+        }
     }
 }
 
@@ -67,7 +73,6 @@ void LoadTGUIWidgets(sf::RenderWindow& window, tgui::GuiBase& gui) {
     gui.add(generate_map_btn);
     // Add button functionality
     generate_map_btn->onPress([&]{
-            CreateMap(window);
             PrintStatement();
             window.clear(sf::Color::White);
             /* generate_map_btn->getRenderer()->setBackgroundColor(sf::Color::Red); */
@@ -157,20 +162,6 @@ void CreateLegendTile(sf::RenderWindow& window, int length, int width, int r, in
 
 
 // // -----------------------------------------------------------------
-// Test
-void CreateMap(sf::RenderWindow& window) {
-    int y = 0;
-    for (int i = 0; i < 30; i++) {
-        sf::RectangleShape tile(sf::Vector2f(30, 30));
-        tile.setFillColor(sf::Color::White);
-        tile.setOutlineColor(sf::Color::Black);
-        tile.setOutlineThickness(1);
-        tile.setPosition(330, y);
-        window.draw(tile);
-        y += 30;
-    }
-}
-
 void ChangeBackground(sf::RenderWindow& window) {
     window.clear(sf::Color::Red);
 }
