@@ -1,7 +1,7 @@
 # include "../include/tile.h"
 
 Tile::Tile(int length, int width, int x_coord, int y_coord) {
-    this->tile = sf::RectangleShape(sf::Vector2f(this->length_, this->width_));
+    this->tile_ = sf::RectangleShape(sf::Vector2f(this->length_, this->width_));
     this->state_ = Unexplored;
     this->length_ = length;
     this->width_ = width;
@@ -16,7 +16,7 @@ void Tile::setUnexplored() {
 }
 
 void Tile::setBorder() {
-    this->tile.setFillColor(sf::Color(0,0,0));
+    this->tile_.setFillColor(sf::Color(0,0,0));
     this->state_ = Border;
 }
 
@@ -43,12 +43,15 @@ TileState Tile::getTileState() {
     return this->state_;
 }
 
-void Tile::CreateTile(sf::RenderWindow& window) {
-    this->tile.setSize(sf::Vector2f(this->length_, this->width_));
-    this->tile.setFillColor(sf::Color(243,246,244));  // off-white
-    this->tile.setOutlineColor(sf::Color::Black);
-    this->tile.setOutlineThickness(.5);
-    this->tile.setPosition(this->x_coord_, this->y_coord_);
-    window.draw(this->tile);
+void Tile::CreateTile() {
+    this->tile_.setSize(sf::Vector2f(this->length_, this->width_));
+    this->tile_.setFillColor(sf::Color(243,246,244));  // off-white
+    this->tile_.setOutlineColor(sf::Color::Black);
+    this->tile_.setOutlineThickness(.5);
+    this->tile_.setPosition(this->x_coord_, this->y_coord_);
+    /* window.draw(this->tile_); */
 }
 
+void Tile::DrawTile(sf::RenderWindow& window) {
+    window.draw(this->tile_);
+}

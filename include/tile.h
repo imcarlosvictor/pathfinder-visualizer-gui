@@ -25,12 +25,13 @@ class Tile {
 		int getXCoord();
 		int getYCoord();
 		TileState getTileState();
-		void CreateTile(sf::RenderWindow& window);
+		void CreateTile();
 		void ResetTile();
+		void DrawTile(sf::RenderWindow& window);
 
 
 	private:
-		sf::RectangleShape tile;
+		sf::RectangleShape tile_;
 		TileState state_;
 		int length_;
 		int width_;

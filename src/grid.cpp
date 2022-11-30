@@ -3,9 +3,10 @@
 Grid::Grid(int rows, int columns) {
     this->rows_ = rows; 
     this->columns_ = columns;
+    this->CreateGrid();
 }
 
-void Grid::CreateGrid(sf::RenderWindow& window) {
+void Grid::CreateGrid() {
     int length = 30, width = 30;
     int y_coord = 0;
     // Add tiles
@@ -13,7 +14,7 @@ void Grid::CreateGrid(sf::RenderWindow& window) {
         int x_coord = 330;
         for (int row = 0; row < 39; row++) {
             Tile* new_tile = new Tile(length, width, x_coord, y_coord);
-            new_tile->CreateTile(window);
+            new_tile->CreateTile();
             this->grid.push_back(new_tile);
             x_coord += 30;
         }
@@ -22,7 +23,13 @@ void Grid::CreateGrid(sf::RenderWindow& window) {
     }
 }
 
-void Grid::ChangeTile(sf::Vector2i mouse_pos) {
+void Grid::UpdateGrid(sf::RenderWindow& window) {
+    for (Tile* tile : grid) {
+        tile->DrawTile(window);
+    }
+}
+
+void Grid::TilePressed(sf::Vector2i mouse_pos) {
     // Find the nearest coordinates
     int x = (mouse_pos.x / 30) * 30;
     int y = (mouse_pos.y - (mouse_pos.y % 30));

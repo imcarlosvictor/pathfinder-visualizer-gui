@@ -10,8 +10,9 @@
 class Grid {
 	public:
 		Grid(int rows, int columns);
-		void CreateGrid(sf::RenderWindow& window);
-		void ChangeTile(sf::Vector2i mouse_pos);
+		void CreateGrid();
+		void UpdateGrid(sf::RenderWindow& window);
+		void TilePressed(sf::Vector2i mouse_pos);
 
 	private:
 		int rows_;

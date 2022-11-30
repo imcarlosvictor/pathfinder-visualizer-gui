@@ -7,7 +7,7 @@ void SFMLWindow() {
     tgui::GuiSFML gui{sfml_window};
     // Load GUI
     LoadTGUIWidgets(sfml_window, gui);  // load TGUI widgets
-    Grid grid(39, 30);
+    Grid grid(39, 30);  // create grid
 
     while(sfml_window.isOpen()) {
         sf::Event event;
@@ -18,17 +18,20 @@ void SFMLWindow() {
         }
         // draw everything here...
         sfml_window.clear(sf::Color(19,19,19));
+        // draw GUI
         LoadSFMLWidgets(sfml_window);  // load legend section
         gui.draw();  // draw all widgets in the gui
-        grid.CreateGrid(sfml_window);
+        // display grid
+        grid.UpdateGrid(sfml_window);
         sfml_window.display();
-
-        // Find cursor position
+        // Events
         if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
             sf::Vector2i mouse_pos = sf::Mouse::getPosition(sfml_window);
-            grid.ChangeTile(mouse_pos);
+            grid.TilePressed(mouse_pos);
         }
     }
+
+    
 }
 
 void LoadTGUIWidgets(sf::RenderWindow& window, tgui::GuiBase& gui) {
