@@ -12,7 +12,7 @@ Tile::Tile(int length, int width, int x_coord, int y_coord) {
 void Tile::CreateTile() {
     this->tile_.setSize(sf::Vector2f(this->length_, this->width_));
     /* this->tile_.setFillColor(sf::Color(243,246,244));  // off-white */
-    this->tile_.setFillColor(sf::Color(213,213,213));  // off-white
+    this->tile_.setFillColor(sf::Color(255,255,255));  // off-white
     this->tile_.setOutlineColor(sf::Color(64,64,64));
     this->tile_.setOutlineThickness(.5);
     this->tile_.setPosition(this->x_coord_, this->y_coord_);
@@ -33,7 +33,7 @@ void Tile::setEndpoint() {
 }
 
 void Tile::setPath() {
-    this->tile_.setFillColor(sf::Color(255,123,0));
+    this->tile_.setFillColor(sf::Color(0,87,255));
     this->state_ = Path;
 }
 
@@ -43,7 +43,7 @@ void Tile::setExplored() {
 }
 
 void Tile::setUnexplored() {
-    this->tile_.setFillColor(sf::Color(213,213,213));
+    this->tile_.setFillColor(sf::Color(255,255,255));
     this->state_ = Unexplored;
 }
 

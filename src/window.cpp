@@ -131,10 +131,10 @@ void LoadTGUIWidgets(tgui::GuiBase& gui, Grid* grid_ptr) {
     // Start button
     auto visualize_btn = tgui::Button::create();
     visualize_btn->setText("VISUALIZE");
-    visualize_btn->getRenderer()->setBackgroundColor(sf::Color(255,123,0));
+    visualize_btn->getRenderer()->setBackgroundColor(sf::Color(0,87,255));
     visualize_btn->getRenderer()->setBorderColor(sf::Color(19,19,19));
-    visualize_btn->getRenderer()->setTextColor(sf::Color(19,19,19));
-    visualize_btn->getRenderer()->setBackgroundColorHover(sf::Color(255,123,0,200));
+    visualize_btn->getRenderer()->setTextColor(sf::Color(213,213,213));
+    visualize_btn->getRenderer()->setBackgroundColorHover(sf::Color(0,87,255,200));
     visualize_btn->getRenderer()->setTextColorHover(sf::Color(19,19,19,200));
     visualize_btn->setSize(250,50);
     visualize_btn->setPosition(40, 780);
@@ -147,8 +147,8 @@ void LoadTGUIWidgets(tgui::GuiBase& gui, Grid* grid_ptr) {
 void LoadSFMLWidgets(sf::RenderWindow& window) {
     CreateLegendTile(window, 30, 30, 34, 139, 34, 43, 460);  // Startpoint tile
     CreateLegendTile(window, 30, 30, 255, 0, 4, 43, 500);  // Endpoint tile
-    CreateLegendTile(window, 30, 30, 255, 123, 0, 43, 540);  // Path tile
-    CreateLegendTile(window, 30, 30, 213, 213, 213, 43, 580);  // Unexplored tile
+    CreateLegendTile(window, 30, 30, 0, 87, 255, 43, 540);  // Path tile
+    CreateLegendTile(window, 30, 30, 255, 255, 255, 43, 580);  // Unexplored tile
     CreateLegendTile(window, 30, 30, 220, 226, 254, 180, 460);  // Explored tile
     CreateLegendTile(window, 30, 30, 64, 64, 64, 180, 500);  // Border tile
 }
