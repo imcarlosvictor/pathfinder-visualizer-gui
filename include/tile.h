@@ -6,6 +6,7 @@
 enum TileState {
 	Start = 0,
 	End,
+	Path,
 	Explored,
 	Unexplored,
 	Border
@@ -14,10 +15,11 @@ enum TileState {
 class Tile {
 	public:
 		Tile(int length, int width, int x_coord, int y_coord);
-		/* ----------- Tile State ----------- */
-		/* ----------- Manipulate Tile State ----------- */
+		void CreateTile();
+		void DrawTile(sf::RenderWindow& window);
 		void setStartpoint();
 		void setEndpoint();
+		void setPath();
 		void setExplored();
 		void setUnexplored();
 		void setBorder();
@@ -25,9 +27,6 @@ class Tile {
 		int getXCoord();
 		int getYCoord();
 		TileState getTileState();
-		void CreateTile();
-		void ResetTile();
-		void DrawTile(sf::RenderWindow& window);
 
 
 	private:

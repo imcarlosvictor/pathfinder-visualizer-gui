@@ -23,24 +23,30 @@ void Grid::CreateGrid() {
     }
 }
 
+void Grid::ResetGrid() {
+    std::cout << "Reset in progress..." << std::endl;
+    for (Tile* tile : this->grid) {
+        tile->setExplored();
+    }
+}
+
 void Grid::UpdateGrid(sf::RenderWindow& window) {
-    for (Tile* tile : grid) {
+    for (Tile* tile : this->grid) {
         tile->DrawTile(window);
     }
 }
 
 void Grid::TilePressed(sf::Vector2i mouse_pos) {
-    // Find the nearest coordinates
+    // Find the coordinate of the tile (Top left of tile)
     int x = (mouse_pos.x / 30) * 30;
     int y = (mouse_pos.y - (mouse_pos.y % 30));
     /* std::cout << "X:" << x << " Y:" << y << std::endl; */
 
     // Find the tile with the coordinates in the vector
-    for (Tile* tile : grid) {
+    for (Tile* tile : this->grid) {
         if (tile->getXCoord() == x && tile->getYCoord() == y) {
-            std::cout << "Tile X:" << tile->getXCoord() << " " << "Tile Y:" << tile->getYCoord() << "   | Tile State:" << tile->getTileState() << std::endl;
             tile->setBorder();
-            std::cout << "Tile State:" << tile->getTileState() << std::endl;
+            /* std::cout << "Tile State:" << tile->getTileState() << std::endl; */
             break;
         }
     }
