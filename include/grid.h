@@ -12,7 +12,7 @@ class Grid {
 		Grid(int rows, int columns);
 		void CreateGrid();
 		void ResetGrid();
-		void UpdateGrid(sf::RenderWindow& window);
+		void RefreshGrid(sf::RenderWindow& window);
 		void TilePressed(sf::Vector2i mouse_pos);
 
 	private:

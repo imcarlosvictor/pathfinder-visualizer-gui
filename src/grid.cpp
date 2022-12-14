@@ -24,13 +24,17 @@ void Grid::CreateGrid() {
 }
 
 void Grid::ResetGrid() {
-    std::cout << "Reset in progress..." << std::endl;
+    /* std::cout << "## Resetting maze ##"  << std::endl; */
+    int i = 0;
     for (Tile* tile : this->grid) {
         tile->setExplored();
+        i++;
     }
+    /* std::cout << i << std::endl; */
+    /* std::cout << "## Reset successful ##" << std::endl; */
 }
 
-void Grid::UpdateGrid(sf::RenderWindow& window) {
+void Grid::RefreshGrid(sf::RenderWindow& window) {
     for (Tile* tile : this->grid) {
         tile->DrawTile(window);
     }

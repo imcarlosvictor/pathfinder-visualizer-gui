@@ -1,15 +1,10 @@
 #include "../include/window.h"
 #include "../include/grid.h"
 
+
 void SFMLWindow() {
     sf::RenderWindow sfml_window(sf::VideoMode(1500,900), "Pathfinder Visualizer");
-    Grid grid(39, 30);  // create grid
-    Grid* grid_ptr = &grid;
-
-
-    std::cout << &grid << std::endl;
-    std::cout << grid_ptr << std::endl;
-
+    Grid* grid_ptr = new Grid(39,30);
     tgui::GuiSFML gui{sfml_window};
     LoadTGUIWidgets(gui, grid_ptr);  // load TGUI widgets
 
@@ -20,26 +15,22 @@ void SFMLWindow() {
             if (event.type == sf::Event::Closed)
                 sfml_window.close();
         }
-        // draw everything here...
+        
+
         sfml_window.clear(sf::Color(19,19,19));
-        // draw GUI
         LoadSFMLWidgets(sfml_window);  // load legend section
         gui.draw();  // draw all widgets in the gui
-        // display grid
-        grid.UpdateGrid(sfml_window);
-        sfml_window.display();
+        
         // Events
         if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
             sf::Vector2i mouse_pos = sf::Mouse::getPosition(sfml_window);
-            grid.TilePressed(mouse_pos);
+            grid_ptr->TilePressed(mouse_pos);
         }
 
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right)) {
-            grid.ResetGrid();
-        }
+        // Update grid
+        grid_ptr->RefreshGrid(sfml_window);
+        sfml_window.display();
     }
-
-    
 }
 
 void LoadTGUIWidgets(tgui::GuiBase& gui, Grid* grid_ptr) {
@@ -105,7 +96,6 @@ void LoadTGUIWidgets(tgui::GuiBase& gui, Grid* grid_ptr) {
     gui.add(algo_btn);
     
     // Reset maze button
-    std::cout << grid_ptr << std::endl;
     auto reset_maze_btn = tgui::Button::create();
     reset_maze_btn->setText("Reset Maze");
     reset_maze_btn->getRenderer()->setBackgroundColor(sf::Color(213,213,213));
@@ -113,7 +103,7 @@ void LoadTGUIWidgets(tgui::GuiBase& gui, Grid* grid_ptr) {
     reset_maze_btn->getRenderer()->setBackgroundColorHover(sf::Color(213,213,213,200));
     reset_maze_btn->setSize(125,35);
     reset_maze_btn->setPosition(40, 744);
-    reset_maze_btn->onPress([&]{ 
+    reset_maze_btn->onPress([=]{ 
             grid_ptr->ResetGrid();
             });
     gui.add(reset_maze_btn);
@@ -172,9 +162,6 @@ void CreateLegendTile(sf::RenderWindow& window, int length, int width, int r, in
     window.draw(legend_tile);
 }
 
-void TempResetGrid(Grid grid) {
-    grid.ResetGrid();
-}
 
 // // -----------------------------------------------------------------
 void ChangeBackground(sf::RenderWindow& window) {
