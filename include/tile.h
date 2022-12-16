@@ -8,8 +8,8 @@ enum TileState {
 	End,
 	Path,
 	Explored,
-	Unexplored,
-	Border
+	Floor,
+	Wall	
 };
 
 class Tile {
@@ -21,8 +21,8 @@ class Tile {
 		void setEndpoint();
 		void setPath();
 		void setExplored();
-		void setUnexplored();
-		void setBorder();
+		void setFloor();
+		void setWall();
 		void setCoordinate(int x, int y);
 		int getXCoord();
 		int getYCoord();

@@ -11,12 +11,13 @@ class Grid {
 	public:
 		Grid(int rows, int columns);
 		void CreateGrid();
-		void ResetGrid();
+		void ClearGrid();
+		void ClearPath();
 		void RefreshGrid(sf::RenderWindow& window);
 		void TilePressed(sf::Vector2i mouse_pos);
 
 	private:
 		int rows_;
 		int columns_;
-		std::vector<Tile*> grid;	
+		std::vector<Tile*> grid_;	
 };

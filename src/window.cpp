@@ -44,7 +44,7 @@ void LoadTGUIWidgets(tgui::GuiBase& gui, Grid* grid_ptr) {
     CreateLegendLabel(gui, "Path", 12, 80, 547);  // Path legend label
     CreateLegendLabel(gui, "Unexplored", 12, 80, 587);  // Unxplored legend label
     CreateLegendLabel(gui, "Explored", 12, 218, 467);  // Explored legend label
-    CreateLegendLabel(gui, "Border", 12, 218, 507);  // Border legend label
+    CreateLegendLabel(gui, "Wall", 12, 218, 507);  // Border legend label
     
     // Map algorithm sidenote
     auto user_note = tgui::Label::create();
@@ -97,14 +97,14 @@ void LoadTGUIWidgets(tgui::GuiBase& gui, Grid* grid_ptr) {
     
     // Reset maze button
     auto reset_maze_btn = tgui::Button::create();
-    reset_maze_btn->setText("Reset Maze");
+    reset_maze_btn->setText("Clear Maze");
     reset_maze_btn->getRenderer()->setBackgroundColor(sf::Color(213,213,213));
     reset_maze_btn->getRenderer()->setBorderColor(sf::Color(19,19,19));
     reset_maze_btn->getRenderer()->setBackgroundColorHover(sf::Color(213,213,213,200));
     reset_maze_btn->setSize(125,35);
     reset_maze_btn->setPosition(40, 744);
     reset_maze_btn->onPress([=]{ 
-            grid_ptr->ResetGrid();
+            grid_ptr->ClearGrid();
             });
     gui.add(reset_maze_btn);
     
@@ -116,6 +116,9 @@ void LoadTGUIWidgets(tgui::GuiBase& gui, Grid* grid_ptr) {
     reset_path_btn->getRenderer()->setBackgroundColorHover(sf::Color(213,213,213,200));
     reset_path_btn->setSize(125,35);
     reset_path_btn->setPosition(165, 744);
+    reset_path_btn->onPress([=]{
+            grid_ptr->ClearPath();
+            });
     gui.add(reset_path_btn);
     
     // Start button

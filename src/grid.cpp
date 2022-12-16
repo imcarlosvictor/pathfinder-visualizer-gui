@@ -15,7 +15,7 @@ void Grid::CreateGrid() {
         for (int row = 0; row < 39; row++) {
             Tile* new_tile = new Tile(length, width, x_coord, y_coord);
             new_tile->CreateTile();
-            this->grid.push_back(new_tile);
+            this->grid_.push_back(new_tile);
             x_coord += 30;
         }
         x_coord = 330;  // Reset x-coordinate
@@ -23,19 +23,23 @@ void Grid::CreateGrid() {
     }
 }
 
-void Grid::ResetGrid() {
-    /* std::cout << "## Resetting maze ##"  << std::endl; */
-    int i = 0;
-    for (Tile* tile : this->grid) {
-        tile->setExplored();
-        i++;
+void Grid::ClearGrid() {
+    for (Tile* tile : this->grid_) {
+        /* tile->setFloor(); */
+        tile->setPath();
     }
-    /* std::cout << i << std::endl; */
-    /* std::cout << "## Reset successful ##" << std::endl; */
+}
+
+void Grid::ClearPath() {
+    for (Tile* tile : this->grid_) {
+        if (tile->getTileState() == 2 || tile->getTileState() == 3) {
+            tile->setFloor();
+        }
+    }
 }
 
 void Grid::RefreshGrid(sf::RenderWindow& window) {
-    for (Tile* tile : this->grid) {
+    for (Tile* tile : this->grid_) {
         tile->DrawTile(window);
     }
 }
@@ -47,12 +51,11 @@ void Grid::TilePressed(sf::Vector2i mouse_pos) {
     /* std::cout << "X:" << x << " Y:" << y << std::endl; */
 
     // Find the tile with the coordinates in the vector
-    for (Tile* tile : this->grid) {
+    for (Tile* tile : this->grid_) {
         if (tile->getXCoord() == x && tile->getYCoord() == y) {
-            tile->setBorder();
+            tile->setWall();
             /* std::cout << "Tile State:" << tile->getTileState() << std::endl; */
             break;
         }
     }
-
 }

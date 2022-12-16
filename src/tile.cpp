@@ -2,7 +2,7 @@
 
 Tile::Tile(int length, int width, int x_coord, int y_coord) {
     this->tile_ = sf::RectangleShape(sf::Vector2f(this->length_, this->width_));
-    this->state_ = Unexplored;
+    this->state_ = Floor;
     this->length_ = length;
     this->width_ = width;
     this->x_coord_ = x_coord;
@@ -42,14 +42,14 @@ void Tile::setExplored() {
     this->state_ = Explored;
 }
 
-void Tile::setUnexplored() {
+void Tile::setFloor() {
     this->tile_.setFillColor(sf::Color(255,255,255));
-    this->state_ = Unexplored;
+    this->state_ = Floor;
 }
 
-void Tile::setBorder() {
+void Tile::setWall() {
     this->tile_.setFillColor(sf::Color(64,64,64));
-    this->state_ = Border;
+    this->state_ = Wall;
 }
 
 void Tile::setCoordinate(int x, int y) {
