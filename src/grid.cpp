@@ -53,20 +53,14 @@ Coordinates Grid::getMousePos(sf::Vector2i mouse_pos) {
 }
 
 void Grid::TilePressed(Coordinates coord) {
-    /* // Find the coordinate of the tile (Top left of tile) */
-    /* int x = (mouse_pos.x / 30) * 30; */
-    /* int y = (mouse_pos.y - (mouse_pos.y % 30)); */
-
-    /* // Find the tile with the coordinates in the vector */
-    /* for (Tile* tile : this->grid_) { */
-    /*     if (tile->getXCoord() == x && tile->getYCoord() == y) { */
-    /*         tile->setWall(); */
-    /*         /1* std::cout << "Tile State:" << tile->getTileState() << std::endl; *1/ */
-    /*         break; */
-    /*     } */
-    /* } */
-
-    this->getTileNeighbors(coord);
+    // Find the tile with the coordinates in the vector
+    for (Tile* tile : this->grid_) {
+        if (tile->getXCoord() == coord.x_coord && tile->getYCoord() == coord.y_coord) {
+            tile->setWall();
+            /* std::cout << "Tile State:" << tile->getTileState() << std::endl; */
+            break;
+        }
+    }
 }
 
 void Grid::getTileNeighbors(Coordinates coord) {
