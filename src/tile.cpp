@@ -57,11 +57,11 @@ void Tile::setCoordinate(int x, int y) {
     this->y_coord_ = y;
 }
 
-int Tile::getXCoord() {
+long unsigned int Tile::getXCoord() {
     return x_coord_;
 }
 
-int Tile::getYCoord() {
+long unsigned int Tile::getYCoord() {
     return y_coord_;
 }
 

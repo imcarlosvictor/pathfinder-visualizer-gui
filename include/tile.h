@@ -24,8 +24,8 @@ class Tile {
 		void setFloor();
 		void setWall();
 		void setCoordinate(int x, int y);
-		int getXCoord();
-		int getYCoord();
+		long unsigned int getXCoord();
+		long unsigned int getYCoord();
 		TileState getTileState();
 
 
@@ -34,6 +34,6 @@ class Tile {
 		TileState state_;
 		int length_;
 		int width_;
-		int x_coord_;
-		int y_coord_;
+		long unsigned int x_coord_;
+		long unsigned int y_coord_;
 };

@@ -3,8 +3,8 @@
 
 
 void SFMLWindow() {
-    sf::RenderWindow sfml_window(sf::VideoMode(1500,900), "Pathfinder Visualizer");
-    Grid* grid_ptr = new Grid(39,30);
+    sf::RenderWindow sfml_window(sf::VideoMode(1530,900), "Pathfinder Visualizer");
+    Grid* grid_ptr = new Grid(40,30);
     tgui::GuiSFML gui{sfml_window};
     LoadTGUIWidgets(gui, grid_ptr);  // load TGUI widgets
 
@@ -24,7 +24,8 @@ void SFMLWindow() {
         // Events
         if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
             sf::Vector2i mouse_pos = sf::Mouse::getPosition(sfml_window);
-            grid_ptr->TilePressed(mouse_pos);
+            Coordinates coords = grid_ptr->getMousePos(mouse_pos);
+            grid_ptr->TilePressed(coords);
         }
 
         // Update grid
