@@ -4,6 +4,7 @@ Grid::Grid(int rows, int columns) {
     this->rows_ = rows; 
     this->columns_ = columns;
     this->CreateGrid();
+    this->maze_gen_ptr_ = new MazeGenerationAlgorithm();
 }
 
 void Grid::CreateGrid() {
@@ -184,5 +185,19 @@ void Grid::getTileNeighbors(Coordinates coord) {
 
         std::cout << "Left tile: " << this->grid_[left_tile_index]->getTileState() << std::endl;
         std::cout << "Top left tile: " << this->grid_[top_left_tile_index]->getTileState() << std::endl;
+    }
+}
+
+void Grid::MazeAlgorithms(const int algo_index) {
+    switch (algo_index) {
+        case 0:
+            this->maze_gen_ptr_->RecursiveDivision();
+            break;
+        case 1:
+            std::cout << 11 << std::endl;
+            break;
+        case 2:
+            std::cout << 22 << std::endl;
+            break;
     }
 }

@@ -3,7 +3,7 @@
 
 
 void SFMLWindow() {
-    sf::RenderWindow sfml_window(sf::VideoMode(1530,900), "Pathfinder Visualizer");
+    sf::RenderWindow sfml_window(sf::VideoMode(1530,900), "Pathfinder Visualizer", sf::Style::Close);
     Grid* grid_ptr = new Grid(40,30);
     tgui::GuiSFML gui{sfml_window};
     LoadTGUIWidgets(gui, grid_ptr);  // load TGUI widgets
@@ -57,12 +57,13 @@ void LoadTGUIWidgets(tgui::GuiBase& gui, Grid* grid_ptr) {
 
     // Map algorithm options
     auto map_btn = tgui::ComboBox::create();
-    map_btn->addItem("Item 1");
+    map_btn->addItem("Recursive Division");
     map_btn->addItem("Item 2");
     map_btn->addItem("Item 3");
     map_btn->getRenderer()->setBackgroundColor(sf::Color(213,213,213));
     map_btn->setSize(250, 25);
     map_btn->setPosition(40, 210);
+    map_btn->setSelectedItem("Recursive Division");
     gui.add(map_btn);
 
     // Generate Map Button
@@ -73,12 +74,11 @@ void LoadTGUIWidgets(tgui::GuiBase& gui, Grid* grid_ptr) {
     generate_map_btn->getRenderer()->setBackgroundColorHover(sf::Color(213,213,213,200));
     generate_map_btn->setSize(250,40);
     generate_map_btn->setPosition(40, 240);
-    gui.add(generate_map_btn);
     // Add button functionality
-    generate_map_btn->onPress([&]{
-            PrintStatement();
-            std::cout << "button pressed" << std::endl;
+    generate_map_btn->onPress([=]{
+            grid_ptr->MazeAlgorithms(map_btn->getSelectedItemIndex());
             });
+    gui.add(generate_map_btn);
 
 
     // Pathfinder algorithm options
