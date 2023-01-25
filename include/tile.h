@@ -27,6 +27,8 @@ class Tile {
 		long unsigned int getXCoord();
 		long unsigned int getYCoord();
 		TileState getTileState();
+		int getTileLength();
+		int getTileWidth();
 
 
 	private:

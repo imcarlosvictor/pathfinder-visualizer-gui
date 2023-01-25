@@ -4,7 +4,6 @@ Grid::Grid(int rows, int columns) {
     this->rows_ = rows; 
     this->columns_ = columns;
     this->CreateGrid();
-    this->maze_gen_ptr_ = new MazeGenerationAlgorithm();
 }
 
 void Grid::CreateGrid() {
@@ -43,14 +42,6 @@ void Grid::RefreshGrid(sf::RenderWindow& window) {
     for (Tile* tile : this->grid_) {
         tile->DrawTile(window);
     }
-}
-
-Coordinates Grid::getMousePos(sf::Vector2i mouse_pos) {
-    // Find the coordinate of the tile (Top left of tile)
-    long unsigned int x = (mouse_pos.x / 30) * 30;
-    long unsigned int y = (mouse_pos.y - (mouse_pos.y % 30));
-    Coordinates coord {x, y};
-    return coord;
 }
 
 void Grid::TilePressed(Coordinates coord) {
@@ -188,10 +179,14 @@ void Grid::getTileNeighbors(Coordinates coord) {
     }
 }
 
-void Grid::MazeAlgorithms(const int algo_index) {
+/*
+ * Contains the logic for generating maze algorithms depending on user choice
+ */
+void Grid::GenerateMazeAlgorithms(const int algo_index, MazeAlgorithms* maze_algo_ptr_) {
+    GridDimension grid_dim = Grid::getGridDimension();
     switch (algo_index) {
         case 0:
-            this->maze_gen_ptr_->RecursiveDivision();
+            maze_algo_ptr_->RecursiveDivision(grid_dim.rows, grid_dim.columns);
             break;
         case 1:
             std::cout << 11 << std::endl;
@@ -200,4 +195,19 @@ void Grid::MazeAlgorithms(const int algo_index) {
             std::cout << 22 << std::endl;
             break;
     }
+}
+
+Coordinates Grid::getMousePos(sf::Vector2i mouse_pos) {
+    // Find the coordinate of the tile (Top left of tile)
+    long unsigned int x = (mouse_pos.x / 30) * 30;
+    long unsigned int y = (mouse_pos.y - (mouse_pos.y % 30));
+    Coordinates coord {x, y};
+    return coord;
+}
+
+GridDimension Grid::getGridDimension() {
+    int rows = this->rows_;
+    int columns = this->columns_;
+    GridDimension grid_dim {rows, columns};
+    return grid_dim;
 }

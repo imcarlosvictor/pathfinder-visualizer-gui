@@ -4,9 +4,16 @@
 
 void SFMLWindow() {
     sf::RenderWindow sfml_window(sf::VideoMode(1530,900), "Pathfinder Visualizer", sf::Style::Close);
+
+
+    // Grid object
     Grid* grid_ptr = new Grid(40,30);
     tgui::GuiSFML gui{sfml_window};
-    LoadTGUIWidgets(gui, grid_ptr);  // load TGUI widgets
+    // Grid Algorithms object
+    MazeAlgorithms* maze_algo_ptr_ = new MazeAlgorithms();
+
+    LoadTGUIWidgets(gui, grid_ptr, maze_algo_ptr_);  // load TGUI widgets
+
 
     while(sfml_window.isOpen()) {
         sf::Event event;
@@ -34,7 +41,7 @@ void SFMLWindow() {
     }
 }
 
-void LoadTGUIWidgets(tgui::GuiBase& gui, Grid* grid_ptr) {
+void LoadTGUIWidgets(tgui::GuiBase& gui, Grid* grid_ptr, MazeAlgorithms* maze_algo_ptr_) {
     // Labels
     CreateLegendLabel(gui, "Algorithm Visualizer", 18, 60, 50);  // GUI title
     CreateLegendLabel(gui, "Map Generation", 15, 40, 140);  // Content label
@@ -76,7 +83,7 @@ void LoadTGUIWidgets(tgui::GuiBase& gui, Grid* grid_ptr) {
     generate_map_btn->setPosition(40, 240);
     // Add button functionality
     generate_map_btn->onPress([=]{
-            grid_ptr->MazeAlgorithms(map_btn->getSelectedItemIndex());
+            grid_ptr->GenerateMazeAlgorithms(map_btn->getSelectedItemIndex(), maze_algo_ptr_);
             });
     gui.add(generate_map_btn);
 
