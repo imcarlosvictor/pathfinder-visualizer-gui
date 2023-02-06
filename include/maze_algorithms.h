@@ -1,10 +1,13 @@
 #pragma once
 
+#include "./grid.h"
+
 #include <iostream>
 #include <string>
 #include <vector>
 
 class MazeAlgorithms {
 	public:
-		void RecursiveDivision(int grid_row, int grid_col);
+		void RecursiveDivision(Grid* grid_ptr);
+		void Divide(Grid* grid_ptr, std::string orientation);
 };

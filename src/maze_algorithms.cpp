@@ -1,11 +1,10 @@
 #include "../include/maze_algorithms.h"
 
-
-void MazeAlgorithms::RecursiveDivision(int grid_row, int grid_col) {
+void MazeAlgorithms::RecursiveDivision(Grid* grid_ptr) {
     std::cout << "recursive div" << std::endl;    
-    std::cout << grid_row << std::endl;    
-    std::cout << grid_col << std::endl;    
-    //
+    std::cout << grid_ptr->getGridDimension().rows << std::endl;    
+    std::cout << grid_ptr->getGridDimension().columns << std::endl;    
+    
     // TODO: Implement recursive maze algorithm
     /* IF the grid has a dimension of 1x1 */
     /*     RETURN */
@@ -25,24 +24,30 @@ void MazeAlgorithms::RecursiveDivision(int grid_row, int grid_col) {
     /*     SET the tile in the array with the same index a gap_index to a floor tile */
     /* ENDIF */
 
-    /* void Divide() { */
 
-    /* } */
-
-    /* if (true) { */
-    /*     return; */
-    /* } else { */
-    /*     /1* GridDimension grid_dim = Grid::getGridDimension(); *1/ // Call from window */
-    /*     unsigned int random_num = rand() % (grid_row + grid_col); */
-    /*     std::vector<int> wall_indices; // Stores all indices of the wall */
+    if (true) {
+        ;
+    } else {
+        int random_num = rand() % (grid_ptr->getGridDimension().rows + grid_ptr->getGridDimension().columns);
         
-    /*     // Choose orientation */
-    /*     if (random_num < grid_col) */
-    /*         // DIVIDE vertical */
-    /*     else */
-    /*         // DIVIDE horizontal */
+        // Choose orientation
+        if (random_num < grid_ptr->getGridDimension().columns)
+            Divide(grid_ptr, "vertical");
+        else
+            Divide(grid_ptr, "horizontal");
 
-    /*     // Create a gap */
-    /*     int gap_index = rand() % wall_indices.size(); */ 
-    /* } */
+        // Create a gap
+        std::vector<int> wall_indices; // Stores all indices of the wall
+        /* int gap_index = rand() % wall_indices.size(); */ 
+    }
 }
+
+/* void MazeAlgorithms::Divide(Grid* grid_ptr, std::string orientation) { */
+/*     /1* if (orientation == "horizontal") { *1/ */
+
+/*     /1* } else { *1/ */
+
+/*     /1* } *1/ */
+
+/*     std::cout << orientation << std::endl; */
+/* } */

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "./tile.h"
-#include "./maze_algorithms.h"
 
 #include <iostream>
 #include <vector>
@@ -28,7 +27,7 @@ class Grid {
 		void RefreshGrid(sf::RenderWindow& window);
 		void TilePressed(Coordinates);
 		void getTileNeighbors(Coordinates);
-		void GenerateMazeAlgorithms(const int algo_index, MazeAlgorithms* maze_algo_ptr_);
+		/* void GenerateMazeAlgorithms(Grid* grid_ptr, MazeAlgorithms* maze_algo_ptr_, const int algo_index); */
 		Coordinates getMousePos(sf::Vector2i mouse_pos);
 		GridDimension getGridDimension();
 

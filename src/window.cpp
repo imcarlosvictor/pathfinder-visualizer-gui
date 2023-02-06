@@ -83,7 +83,8 @@ void LoadTGUIWidgets(tgui::GuiBase& gui, Grid* grid_ptr, MazeAlgorithms* maze_al
     generate_map_btn->setPosition(40, 240);
     // Add button functionality
     generate_map_btn->onPress([=]{
-            grid_ptr->GenerateMazeAlgorithms(map_btn->getSelectedItemIndex(), maze_algo_ptr_);
+            /* grid_ptr->GenerateMazeAlgorithms(grid_ptr, maze_algo_ptr_, map_btn->getSelectedItemIndex()); */
+            maze_algo_ptr_->RecursiveDivision(grid_ptr);
             });
     gui.add(generate_map_btn);
 
@@ -101,6 +102,9 @@ void LoadTGUIWidgets(tgui::GuiBase& gui, Grid* grid_ptr, MazeAlgorithms* maze_al
     algo_btn->getRenderer()->setBackgroundColor(sf::Color(213,213,213));
     algo_btn->setSize(250, 25);
     algo_btn->setPosition(40, 350);
+    /* algo_btn->onPress([=]{ */
+    /*         // Create pathfinding class */
+    /*         }) */
     gui.add(algo_btn);
     
     // Reset maze button

@@ -182,20 +182,20 @@ void Grid::getTileNeighbors(Coordinates coord) {
 /*
  * Contains the logic for generating maze algorithms depending on user choice
  */
-void Grid::GenerateMazeAlgorithms(const int algo_index, MazeAlgorithms* maze_algo_ptr_) {
-    GridDimension grid_dim = Grid::getGridDimension();
-    switch (algo_index) {
-        case 0:
-            maze_algo_ptr_->RecursiveDivision(grid_dim.rows, grid_dim.columns);
-            break;
-        case 1:
-            std::cout << 11 << std::endl;
-            break;
-        case 2:
-            std::cout << 22 << std::endl;
-            break;
-    }
-}
+/* void Grid::GenerateMazeAlgorithms(Grid* grid_ptr, MazeAlgorithms* maze_algo_ptr_, const int algo_index) { */
+/*     switch (algo_index) { */
+/*         case 0: */
+/*             /1* maze_algo_ptr_->RecursiveDivision(grid_ptr, grid_dim.rows, grid_dim.columns); *1/ */
+/*             maze_algo_ptr_->RecursiveDivision(grid_ptr, grid_ptr->getGridDimension().rows, grid_ptr->getGridDimension().columns); */
+/*             break; */
+/*         case 1: */
+/*             std::cout << 11 << std::endl; */
+/*             break; */
+/*         case 2: */
+/*             std::cout << 22 << std::endl; */
+/*             break; */
+/*     } */
+/* } */
 
 Coordinates Grid::getMousePos(sf::Vector2i mouse_pos) {
     // Find the coordinate of the tile (Top left of tile)
